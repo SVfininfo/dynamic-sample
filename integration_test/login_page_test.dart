@@ -4,7 +4,6 @@ import 'package:hive_test/login_page.dart';
 import 'package:hive_test/main.dart';
 import 'package:hive_test/user.dart';
 import 'package:integration_test/integration_test.dart';
-
 import 'package:hive_test/main.dart' as app;
 import 'package:provider/provider.dart';
 
@@ -16,6 +15,7 @@ void main() {
     testWidgets('hive test',
         (tester) async {
       app.main();
+      // await tester.pumpWidget(const MyApp());
       await tester.pumpWidget(MultiProvider(providers: [
         ChangeNotifierProvider(create:(_)=>User())
       ],child:const MyApp() ,));
@@ -33,16 +33,21 @@ void main() {
       await tester.pumpAndSettle(const Duration(seconds: 3));
       await tester.tap(eposlogin);
       await tester.pumpAndSettle(const Duration(seconds: 4));
-
       // final back2 fin home = find.byKey(Key("back2 fin home"));
       // await tester.tap(back2 fin home);
       // await tester.pumpAndSettle(const Duration(seconds: 5));
 // Warning thrown on this tap - tap never executed
           await tester.ensureVisible(find.text('You are in ePOS now'));
           await tester.tap(find.text('You are in ePOS now'));
+          final next = find.byKey(const Key("next"));
+          await tester.tap(next);
+          await tester.pumpAndSettle(const Duration(seconds: 5));
           // await binding.convertFlutterSurfaceToImage();
           // await tester.pumpAndSettle();
           // await binding.takeScreenshot('screenshots/screenshot.png');
+          // await tester.pumpAndSettle();
+          await tester.ensureVisible(find.text('Come back Soon!'));
+          await tester.tap(find.text('Come back Soon!'));
           await tester.pumpAndSettle();
           // await tester.pumpAndSettle();
       // final back_to_epos_login = find.byKey(Key("back"));

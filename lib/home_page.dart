@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hive_test/user.dart';
+import 'package:hive_test/username.dart';
 import 'package:provider/provider.dart';
 import 'login_page.dart';
 
@@ -12,12 +13,13 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   // String email = box1.get('email');
+  final _formkey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
     return Consumer<User>(builder: (context, user, _) {
       return MaterialApp(
-        debugShowCheckedModeBanner: false,
+          debugShowCheckedModeBanner: false,
           home: Scaffold(
               resizeToAvoidBottomInset: false,
               appBar: AppBar(
@@ -29,13 +31,11 @@ class _HomePageState extends State<HomePage> {
                       color: Colors.white, fontWeight: FontWeight.bold),
                 )),
               ),
-
               body: Center(
-
                   child: Column(children: [
-                    const SizedBox(
-                      height: 30,
-                    ),
+                const SizedBox(
+                  height: 30,
+                ),
                 Image.asset(
                   'assets/images/epos.jpg',
                   height: 300,
@@ -60,8 +60,7 @@ class _HomePageState extends State<HomePage> {
                   child: Card(
                     elevation: 20,
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15)
-                    ),
+                        borderRadius: BorderRadius.circular(15)),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -88,7 +87,9 @@ class _HomePageState extends State<HomePage> {
                             ],
                           ),
                         ),
-                        const SizedBox(height: 20,),
+                        const SizedBox(
+                          height: 20,
+                        ),
                         Padding(
                           padding: const EdgeInsets.all(2.0),
                           child: Row(
@@ -118,39 +119,37 @@ class _HomePageState extends State<HomePage> {
                 const SizedBox(
                   height: 20,
                 ),
-                //
-                // InkWell(
-                //   key: const Key("back"),
-                //   onTap: () {
-                //     if (_formKey.currentState!.validate()){
-                //     Navigator.pushAndRemoveUntil(context,
-                //         MaterialPageRoute(builder: (_) => const LoginPage()));
-                //     Navigator.of(context).pushAndRemoveUntil(
-                //         MaterialPageRoute(
-                //             builder: (context) => const LoginPage()),
-                //             (Route<dynamic> route) => false);
-                //     }else{
-                //       return null;
-                //     }
-                //   },
-                //   child: Container(
-                //     height: 50,
-                //     width: 100,
-                //     decoration: BoxDecoration(
-                //       color: Colors.deepOrangeAccent,
-                //       borderRadius: BorderRadius.circular(10),
-                //     ),
-                //     child: const Center(
-                //       child: Text(
-                //         "back",
-                //         style: TextStyle(
-                //             color: Colors.white,
-                //             fontWeight: FontWeight.bold,
-                //             fontSize: 20),
-                //       ),
-                //     ),
-                //   ),
-                // ),
+
+                InkWell(
+                  key: const Key("next"),
+                  onTap: () {
+                    Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(builder: (_) => const UserName()),
+                        (route) => false);
+                    // Navigator.of(context).pushAndRemoveUntil(
+                    //     MaterialPageRoute(
+                    //         builder: (context) => const LoginPage()),
+                    //         (Route<dynamic> route) => false);
+                  },
+                  child: Container(
+                    height: 50,
+                    width: 100,
+                    decoration: BoxDecoration(
+                      color: Colors.deepOrangeAccent,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: const Center(
+                      child: Text(
+                        "Next",
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20),
+                      ),
+                    ),
+                  ),
+                ),
                 // const SizedBox(
                 //   height: 20,
                 // ),
@@ -183,6 +182,8 @@ class _HomePageState extends State<HomePage> {
                 //   ),
                 // ),
               ]))));
-    });
+    }
+    );
   }
+
 }
